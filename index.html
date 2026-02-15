@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nice Mutlu Yıllara!</title>
+    <style>
+        body {
+            background-color: #fff5f8; /* Hafif pembe tonlu temiz bir arka plan */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #text {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #444;
+            text-align: center;
+            max-width: 80%;
+            z-index: 10;
+        }
+
+        /* Çiçeklerin genel stili */
+        .flower {
+            position: absolute;
+            font-size: 4rem; /* Çiçek boyutu */
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            transform: scale(0.5);
+        }
+
+        /* Konumlandırmalar (Köşelerden %10 içeride) */
+        .top-left     { top: 10%; left: 10%; }
+        .top-right    { top: 10%; right: 10%; }
+        .bottom-left  { bottom: 10%; left: 10%; }
+        .bottom-right { bottom: 10%; right: 10%; }
+
+        /* Yazı bittiğinde eklenecek animasyon sınıfı */
+        .show-flower {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="text"></div>
+
+    <div class="flower top-left">🌸</div>
+    <div class="flower top-right">🌻</div>
+    <div class="flower bottom-left">🌷</div>
+    <div class="flower bottom-right">🌹</div>
+
+    <script>
+        const message = "İyi ki doğdun! Yeni yaşında her şey gönlünce olsun... 🎂✨";
+        const speed = 80; 
+        let i = 0;
+
+        function typeWriter() {
+            if (i < message.length) {
+                document.getElementById("text").innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Yazı bitince tüm çiçekleri göster
+                const flowers = document.querySelectorAll('.flower');
+                flowers.forEach(flower => {
+                    flower.classList.add('show-flower');
+                });
+            }
+        }
+
+        // Sayfa yüklendiğinde başlat
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>
